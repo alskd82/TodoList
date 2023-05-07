@@ -1,0 +1,12 @@
+.container{
+    height: 100%;
+    display: flex;
+    min-height: 0; /* flex 가 적용된 컨테이너의 자식들이 많아질경우를 대비*/
+    flex-direction: column;
+    background-color: var(--color-bg);
+}
+
+.list{
+    flex: 1 1 auto;
+    overflow-y: scroll;
+}
