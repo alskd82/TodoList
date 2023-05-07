@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AddTodo from "../AddTodo/AddTodo";
 import Todo from "../Todo/Todo";
 
-export default function TodoList() {
+export default function TodoList({filter}) {
     const [todos, setTodos] = useState([
         { id: "123", text: "장보기", status: "active" },
         { id: "124", text: "공부하기", status: "active" },
@@ -13,24 +13,18 @@ export default function TodoList() {
         setTodos([...todos, todo]);
     };
     const handleUpdate = (updated) => {
-        setTodos(todos.map((todo) => (todo.id === updated.id ? updated : todo)))
         /* 업데이트 된 투두를 업데이트 한다. */
-        // const updatedTodos = todos.map((todo) => {
-        //     if (todo.id === updated.id) {
-        //         return updated;
-        //     }
-        //     return todo;
-        // });
-        // setTodos(updatedTodos);
+        setTodos(todos.map((todo) => (todo.id === updated.id ? updated : todo)))
     };
     const handleDelete = (deleted) => {
         /* 삭제 된 투두를 업데이트 한다. */
         setTodos(todos.filter((todo) => todo.id !== deleted.id));
     };
+    const filtered = getFilterItmes(todos, filter);
     return (
         <section>
             <ul>
-                {todos.map((item) => (
+                {filtered.map((item) => (
                     <Todo
                         key={item.id}
                         id={item.id}
@@ -43,4 +37,17 @@ export default function TodoList() {
             <AddTodo onAdd={handleAdd} />
         </section>
     );
+}
+
+function getFilterItmes(todos, filter) {
+    // switch (filter) {
+    //     case "active":
+    //         return todos.filter((item) => item.status === "active");
+    //     case "completed":
+    //         return todos.filter((item) => item.status === "completed");
+    //     default:
+    //         return todos;
+    // }
+    if(filter === "all") return todos;
+    return todos.filter((item) => item.status === filter);
 }
