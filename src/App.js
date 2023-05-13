@@ -2,13 +2,14 @@ import { useState } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import TodoList from './components/TodoList/TodoList';
+import { DarkModeProvider } from './context/DarkModeConext';
 
 const filterOptions = ["all", "active", "completed"]
 
 function App() {
   const [filter, setFilter] = useState(filterOptions[0])
   return (
-    <>
+    <DarkModeProvider>
       <Header 
         filterOptions={filterOptions} // 필터의 종류를 배열로 전달
         filter={filter} // 현재 필터 상태를 전달
@@ -16,7 +17,7 @@ function App() {
         /* onFilterChange={(filter) => setFilter(filter)} */ // 풀어쓰는 법
       />
       <TodoList filter={filter} />
-    </>
+    </DarkModeProvider>
   );
 }
 export default App;
