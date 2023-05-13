@@ -16,8 +16,8 @@ export const DarkModeProvider = ({ children }) => {
             (!('theme' in localStorage) &&
             window.matchMedia('(prefers-color-scheme: dark)').matches);
 
-        setDarkMode(darkMode)
-        updateDarkMode(darkMode);
+        setDarkMode(isDarkMode)
+        updateDarkMode(isDarkMode);
     }, []) // 첫 렌더링 시에만 실행하기 위해 빈 배열을 두번째 인자로 넘겨준다.
 
     return (
